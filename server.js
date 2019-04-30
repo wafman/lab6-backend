@@ -34,10 +34,6 @@ function handleError() {
 app.get('/location', (request, response) => {
   try {
     const data = require('./data/geo.json');
-    console.log(request.query.data);
-    console.log(data.results[0].formatted_address);
-    console.log(data.results[0].geometry.location.lat);
-    console.log(data.results[0].geometry.location.lng);
     // console.log(data.address_component);
     let city = new GEOloc(request.query.data, data.results[0].formatted_address, data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
     response.send(city);
@@ -53,7 +49,6 @@ app.get('/weather', (request, response) => {
     const data = require('./data/darksky.json');
     let daily = Object.entries(data)[6];
     let dailyData = daily[1].data;//hourly day forecast
-    console.log(dailyData);
 
     let myForecast = [];
     dailyData.forEach(element => {
@@ -71,6 +66,7 @@ app.get('/weather', (request, response) => {
 
 
 });
+
 
 app.use('*', (request, response) => response.send('Sorry, that route does not exist.'))
 
