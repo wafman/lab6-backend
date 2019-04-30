@@ -1,21 +1,21 @@
 # lab6-backend
 
-Number and name of feature: 
+Number and name of feature: Repository Set up
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1 hour
 
-Start time: 
+Start time: 9:00am
 
-Finish time: 
+Finish time: 9:30am
 
-Actual time needed to complete: 
+Actual time needed to complete: 30 minutes
 
 
-Number and name of feature: 
+Number and name of feature: Locations
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1 hour
 
-Start time: 
+Start time: 9:30am
 
 Finish time: 
 
