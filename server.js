@@ -2,26 +2,28 @@
 
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors'); app.use(cors());
+const cors = require('cors');
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-
+app.use(cors());
 app.use(express.static('./public'));
 
+app.get('/', (request, response) =>{
+  response.send('server works');
+});
+
 app.get('/location', (request, response) => {
-
-  response.status(200).json();
-});
-
-app.get('/data', (request, response) => {
-  let airplanes = {
-    departure: Date.now(),
-    canFly: true,
-    pilot: 'Well Trained'
+  let city = {
+    search_query: 'seattle',
+    formatted_query: 'Seattle, WA, USA',
+    latitude: '47.606210',
+    longitude: '-122.332071'
   }
-  response.status(200).json(airplanes);
+  response.send(city);
 });
+
 
 app.use('*', (request, response) => response.send('Sorry, that route does not exist.'))
 
