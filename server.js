@@ -16,10 +16,10 @@ app.get('/', (request, response) => {
 });
 
 function GEOloc(query, fmtQ, lat, long) {
-  this.query = query;
-  this.fmtQ = fmtQ;
-  this.lat = lat;
-  this.long = long;
+  this.search_query = query;
+  this.formatted_query = fmtQ;
+  this.latitude = lat;
+  this.longitude = long;
 }
 
 function Forecast(forecast, time) {
