@@ -29,12 +29,9 @@ function Forecast(forecast,time){
 
 app.get('/location', (request, response) => {
   const data = require('./data/geo.json');
-  console.log(request.query.data);
-  console.log(data.results[0].formatted_address);
-  console.log(data.results[0].geometry.location.lat);
-  console.log(data.results[0].geometry.location.lng);
-  // console.log(data.address_component);
-  let city = new GEOloc(request.query.data, data.results[0].formatted_address, data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
+  let cityQuery = request.query.data;
+  console.log(`city query = ${cityQuery}`);
+  let city = new GEOloc(cityQuery, data.results[0].formatted_address, data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
   response.send(city);
 });
 
@@ -56,6 +53,7 @@ app.get('/weather', (request, response) => {
   console.log(myForecast);
   response.send(myForecast);
 });
+
 
 app.use('*', (request, response) => response.send('Sorry, that route does not exist.'))
 
