@@ -6,7 +6,6 @@ const cors = require('cors');
 
 const app = express();
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.static('./public'));
@@ -22,18 +21,26 @@ function GEOloc (query,fmtQ,lat,long){
   this.long = long;
 }
 
+function Forecast(forecast,time){
+  this.forecast = forecast;
+  this.time = time;
+}
+
 app.get('/location', (request, response) => {
   $.get('./data/geo.json', data => {
     console.log(data);
   });
-  
-  response.send(city);
+
+  response.send();
 });
 
-/**
- * funxtion GEOLoxation(var1, var1){}
- * 
- */
+app.get('/weather', (request, response) => {
+  $.get('./data/darksky.json', data => {
+    console.log(data);
+  });
+  response.send();
+});
+
 
 app.use('*', (request, response) => response.send('Sorry, that route does not exist.'))
 
