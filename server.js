@@ -5,26 +5,36 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
+
+const app = express();
 const PORT = process.env.PORT || 3000;
-
 app.use(cors());
+app.use(express.static('./public'));
 
-// app.use(express.static('./public'));
-
-
-app.get('/hello', (request, response) => {
-  response.status(200).send('Hello');
+app.get('/', (request, response) =>{
+  response.send('server works');
 });
 
-app.get('/data', (request, response) => {
-  let airplanes = {
-    departure: Date.now(),
-    canFly: true,
-    pilot: 'Well Trained'
-  };
-  response.status(200).json(airplanes);
+function GEOloc (query,fmtQ,lat,long){
+  this.query = query;
+  this.fmtQ = fmtQ;
+  this.lat = lat;
+  this.long = long;
+}
+
+app.get('/location', (request, response) => {
+  $.get('./data/geo.json', data => {
+    console.log(data);
+  });
+  
+  response.send(city);
 });
 
-app.use('*', (request, response) => response.send('Sorry, that route does not exist.'));
+/**
+ * funxtion GEOLoxation(var1, var1){}
+ * 
+ */
+
+app.use('*', (request, response) => response.send('Sorry, that route does not exist.'))
 
 app.listen(PORT,() => console.log(`Listening on port ${PORT}`));
