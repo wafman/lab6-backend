@@ -1,12 +1,12 @@
 'use strict';
 
 require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 
 const app = express();
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.static('./public'));
@@ -23,10 +23,13 @@ function GEOloc (query,fmtQ,lat,long){
 }
 
 app.get('/location', (request, response) => {
-  $.get('./data/geo.json', data => {
-    console.log(data);
-  });
-  
+  const data = require('./data/geo.json');
+  console.log(request.query.data);
+  console.log(data.results[0].formatted_address);
+  console.log(data.results[0].geometry.location.lat);
+  console.log(data.results[0].geometry.location.lng);
+  // console.log(data.address_component);
+  let city = new GEOloc(request.query.data, data.results[0].formatted_address, data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
   response.send(city);
 });
 
