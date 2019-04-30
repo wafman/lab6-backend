@@ -22,6 +22,11 @@ function GEOloc (query,fmtQ,lat,long){
   this.long = long;
 }
 
+function Forecast(forecast,time){
+  this.forecast = forecast;
+  this.time = time;
+}
+
 app.get('/location', (request, response) => {
   const data = require('./data/geo.json');
   console.log(request.query.data);
@@ -33,10 +38,24 @@ app.get('/location', (request, response) => {
   response.send(city);
 });
 
-/**
- * funxtion GEOLoxation(var1, var1){}
- * 
- */
+
+app.get('/weather', (request, response) => {
+  const data = require('./data/darksky.json');
+  let daily = Object.entries(data)[6];
+  console.log(daily);
+  let dailyData = daily[1].data;//hourly day forecast
+  console.log(dailyData);
+
+  let myForecast = [];
+  dailyData.forEach(element => {
+    let date = new Date(element.time * 1000).toDateString();
+    let temp = new Forecast(element.summary,date);
+    myForecast.push(temp);
+  });
+
+  console.log(myForecast);
+  response.send(myForecast);
+});
 
 app.use('*', (request, response) => response.send('Sorry, that route does not exist.'))
 
